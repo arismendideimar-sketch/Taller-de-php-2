@@ -1,8 +1,12 @@
-<?php
-
-function convertirALeet(string $texto): string
-{
-    $leetMap = [
+<form action="" method="post">
+        <label for="texto">Texto a Traducir</label>
+        <input required type="text" name="texto" placeholder="Escribe algo...">
+        <input type="submit" value="Traducir a Leet" name="enviar_ej2">
+    </form>
+    <?php
+    if (isset($_POST['enviar_ej2'])) {
+        $texto = $_POST['texto'];
+        $leetMap = [
         'a' => '4',
         'b' => 'I3',
         'c' => '[',
@@ -32,18 +36,11 @@ function convertirALeet(string $texto): string
         ' ' => ' '
     ];
 
-    $textoMinuscula = strtolower($texto);
-    $resultado = "";
-
-    for ($i = 0; $i < strlen($textoMinuscula); $i++) {
-        $caracter = $textoMinuscula[$i];
-        if (isset($leetMap[$caracter])) {
-            $resultado .= $leetMap[$caracter];
-        } else {
-            $resultado .= $caracter;
+        $textoMinuscula = strtolower($texto);
+        $resultado = "";
+        for ($i = 0; $i < strlen($textoMinuscula); $i++) {
+            $caracter = $textoMinuscula[$i];
+            $resultado .= isset($leetMap[$caracter]) ? $leetMap[$caracter] : $caracter;
         }
+        echo "<br>El texto traducido es: <strong>$resultado</strong>";
     }
-    return $resultado;
-}
-
-echo convertirALeet("Hola mundo programador");
